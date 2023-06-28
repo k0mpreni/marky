@@ -2,6 +2,16 @@
 
 A template for SaaS built with Svelte, Supabase and Stripe
 
+Why? So you can quickly bootstrap and focus on your idea
+
+## Todo
+
+[] Base Supabase setup with profiles and subscription / payment
+[] Deployment somewhere
+[] Better tailwind / components
+
+And a lot other stuff that I will build while learning more about SaaS, like good landing pages and so on
+
 ## Development
 
 Clone the repo then copy the `.env.example` into a `.env` file and add your env variables
@@ -31,3 +41,5 @@ How to set prices: https://www.indiehackers.com/post/the-ultimate-guide-to-saas-
 ## Thanks
 
 The free Tailwind components from https://www.tailbits.com/components/free
+
+If you are building stuff with this, I would love to see what you built, feel free to ping me!
