@@ -1,38 +1,33 @@
-# create-svelte
+# marky
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+A template for SaaS built with Svelte, Supabase and Stripe
 
-## Creating a project
+## Development
 
-If you're seeing this, you've probably already done this step. Congrats!
+Clone the repo then copy the `.env.example` into a `.env` file and add your env variables
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
 ```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
+cd marky
+npm install
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+## Setup Supabase
 
-To create a production version of your app:
+Sign into Supabase
+Create a project
+In "Authentication", set the wanted providers and add them into the `login` page
+https://supabase.com/docs/guides/auth/social-login
 
-```bash
-npm run build
-```
+## Setup Stripe
 
-You can preview the production build with `npm run preview`.
+Sign into Stripe
+Go to Products and add the wanted products, this will be the plans shown on the site
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## Useful links
+
+How to set prices: https://www.indiehackers.com/post/the-ultimate-guide-to-saas-pricing-7962e070de
+
+## Thanks
+
+The free Tailwind components from https://www.tailbits.com/components/free

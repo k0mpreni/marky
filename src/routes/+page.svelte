@@ -1,6 +1,5 @@
 <script lang="ts">
-	import Hero from '../components/hero.svelte';
-
+	import Hero from '$lib/components/hero.svelte';
 	export let data;
 
 	let { supabase, session } = data;

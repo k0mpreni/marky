@@ -1,9 +1,13 @@
 <script lang="ts">
+	import { APP_NAME } from '$lib/utils/consts';
+
 	export let data;
 	async function signInWithGoogle() {
 		const response = await data.supabase.auth.signInWithOAuth({
-			provider: 'google'
+			provider: 'google',
+			options: { redirectTo: '/plans' }
 		});
+		console.log(response);
 	}
 	async function signInWithGithub() {
 		const response = await data.supabase.auth.signInWithOAuth({
@@ -18,11 +22,11 @@
 
 <section>
 	<div
-		class="flex items-center justify-center px-4 py-10 bg-white sm:px-6 lg:px-8 sm:py-16 lg:py-24"
+		class="flex items-center justify-center px-4 py-10 bg-gray-50 sm:px-6 lg:px-8 sm:py-16 lg:py-24"
 	>
 		<div class="xl:w-full xl:max-w-sm 2xl:max-w-md xl:mx-auto">
 			<h1 class="text-3xl font-bold leading-tight text-black sm:text-4xl mb-12">
-				Sign in to Celebration
+				Sign in to {APP_NAME}
 			</h1>
 
 			<div class="mt-3 space-y-3">

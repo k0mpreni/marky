@@ -37,6 +37,8 @@
 		"@supabase/auth-helpers-sveltekit": "^0.10.1",
 		"@supabase/auth-ui-shared": "^0.1.6",
 		"@supabase/auth-ui-svelte": "^0.2.2",
-		"@supabase/supabase-js": "^2.26.0"
+		"@supabase/supabase-js": "^2.26.0",
+		"dotenv": "^16.3.1",
+		"stripe": "^12.10.0"
 	}
 }

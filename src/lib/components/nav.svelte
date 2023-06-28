@@ -3,16 +3,12 @@
 	export let isLoggedIn = false;
 </script>
 
-<header class="bg-[#FCF8F1] bg-opacity-30">
+<header class="bg-opacity-30">
 	<div class="px-4 mx-auto sm:px-6 lg:px-8">
 		<div class="flex items-center justify-between h-16 lg:h-20">
 			<div class="flex-shrink-0">
 				<a href="/" title="Home" class="flex">
-					<img
-						class="w-auto h-8"
-						src="https://cdn.rareblocks.xyz/collection/celebration/images/logo.svg"
-						alt=""
-					/>
+					<img class="w-auto h-8" src="https://placehold.co/160x32" alt="" />
 				</a>
 			</div>
 
@@ -55,35 +51,11 @@
 
 			<div class="hidden lg:flex lg:items-center lg:justify-center lg:space-x-10">
 				<a
-					href="#"
+					href="/plans"
 					title=""
 					class="text-base text-black transition-all duration-200 hover:text-opacity-80"
 				>
-					Features
-				</a>
-
-				<a
-					href="#"
-					title=""
-					class="text-base text-black transition-all duration-200 hover:text-opacity-80"
-				>
-					Solutions
-				</a>
-
-				<a
-					href="#"
-					title=""
-					class="text-base text-black transition-all duration-200 hover:text-opacity-80"
-				>
-					Resources
-				</a>
-
-				<a
-					href="#"
-					title=""
-					class="text-base text-black transition-all duration-200 hover:text-opacity-80"
-				>
-					Pricing
+					Plans
 				</a>
 				{#if isLoggedIn}
 					<RoundLink name="Account" link="/user/account" />

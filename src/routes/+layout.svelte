@@ -2,7 +2,7 @@
 	import '../app.css';
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import Nav from '../components/nav.svelte';
+	import Nav from '$lib/components/nav.svelte';
 
 	export let data;
 
@@ -22,7 +22,7 @@
 	});
 </script>
 
-<div class="flex flex-col h-full">
+<div class="bg-gray-50 flex flex-col h-full">
 	<Nav isLoggedIn={!!session} />
 	<slot />
 </div>
