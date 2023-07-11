@@ -7,7 +7,6 @@
 			provider: 'google',
 			options: { redirectTo: '/plans' }
 		});
-		console.log(response);
 	}
 	async function signInWithGithub() {
 		const response = await data.supabase.auth.signInWithOAuth({

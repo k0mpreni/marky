@@ -8,7 +8,7 @@
 
 <div class={`bg-white border-4 ${principal ? 'border-blue-600' : 'border-transparent'} rounded-md`}>
 	<form method="POST" action="?/choosePlan" use:enhance>
-		<input class="hidden" type="text" name="priceId" value={plan.default_price} />
+		<input class="hidden" type="text" name="priceId" value={plan.id} />
 		<div class="p-6 md:py-10 md:px-9">
 			<div
 				class={`inline-block px-4 py-2 ${principal ? 'bg-blue-100' : 'bg-gray-100'} rounded-full`}
@@ -16,9 +16,15 @@
 				<h3 class="text-sm font-semibold text-gray-900">{plan.name}</h3>
 			</div>
 			<p class={`mt-5 text-5xl font-bold  ${principal ? 'text-blue-600' : 'text-black'}`}>
-				${plan.price.unit_amount / 100}
+				${plan.unit_amount / 100}
 			</p>
-			<p class="mt-2 text-base text-gray-600">Per month</p>
+			<p class="mt-2 text-base text-gray-600">
+				{#if plan.yearly}
+					Per year
+				{:else}
+					Per month
+				{/if}
+			</p>
 
 			<ul class="flex flex-col mt-8 space-y-4">
 				<li class="inline-flex items-center space-x-2">
@@ -117,14 +123,22 @@
 			</ul>
 
 			<button
+				disabled={plan.current}
 				class={`inline-flex items-center justify-center w-full px-4 py-4 mt-8 font-semibold text-white transition-all duration-200 rounded-md ${
 					principal
 						? 'bg-gradient-to-r from-fuchsia-600 to-blue-600 hover:opacity-80 focus:opacity-80'
 						: 'bg-gray-800 hover:bg-gray-600 focus:bg-gray-600'
 				}`}
 			>
-				Get this plan
+				{#if plan.current}
+					Your plan
+				{:else}
+					Get this plan
+				{/if}
 			</button>
+			{#if plan.current}
+				<button class="underline py-5" formaction="?/cancelPlan">Cancel</button>
+			{/if}
 			{#if noCard}
 				<p class="mt-5 text-sm text-gray-500">No Credit Card Required</p>
 			{/if}
