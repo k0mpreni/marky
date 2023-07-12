@@ -3,7 +3,8 @@
 	import Switch from '$lib/components/switch.svelte';
 
 	export let data;
-	$: plans = data.plans;
+	let yearly = false;
+	$: plans = data.plans.filter((el) => el.yearly === yearly);
 </script>
 
 <svelte:head>
@@ -20,8 +21,8 @@
 				consequat duis.
 			</p>
 		</div>
+		<Switch handleClick={() => (yearly = !yearly)} checked={yearly} />
 		<div class="grid max-w-3xl grid-cols-1 gap-6 mx-auto mt-8 sm:mt-16 sm:grid-cols-2">
-			<Switch />
 			{#each plans as plan, index}
 				<Plan {plan} principal={index === 1} />
 			{/each}
