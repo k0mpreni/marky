@@ -11,11 +11,10 @@ export const handleCheckoutCompleted = async (checkout) => {
 			.from('profiles')
 			.update({
 				stripe_subscription_id: subscription.id,
-				stripe_subscription_status: subscription.status
+				stripe_subscription_status: subscription.status,
+				stripe_plan_id: subscription.plan.id
 			})
 			.eq('user_id', userId);
-
-		console.log(error);
 	} catch (e) {
 		console.error('ERR: Updating user', e);
 	}

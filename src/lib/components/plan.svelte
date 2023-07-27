@@ -8,7 +8,7 @@
 
 <div class={`bg-white border-4 ${principal ? 'border-blue-600' : 'border-transparent'} rounded-md`}>
 	<form method="POST" action="?/choosePlan" use:enhance>
-		<input class="hidden" type="text" name="priceId" value={plan.id} />
+		<input class="hidden" type="hidden" name="planId" value={plan.id} />
 		<div class="p-6 md:py-10 md:px-9">
 			<div
 				class={`inline-block px-4 py-2 ${principal ? 'bg-blue-100' : 'bg-gray-100'} rounded-full`}
@@ -72,23 +72,6 @@
 					</svg>
 					<span class="text-base font-medium text-gray-900"> Full Celebration Library </span>
 				</li>
-
-				<li class="inline-flex items-center space-x-2">
-					<svg
-						class="flex-shrink-0 w-5 h-5 text-green-500"
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 20 20"
-						fill="currentColor"
-					>
-						<path
-							fill-rule="evenodd"
-							d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-							clip-rule="evenodd"
-						/>
-					</svg>
-					<span class="text-base font-medium text-gray-900"> 120+ Coded Blocks </span>
-				</li>
-
 				<li class="inline-flex items-center space-x-2">
 					<svg
 						class="flex-shrink-0 w-5 h-5 text-green-500"
@@ -136,8 +119,8 @@
 					Get this plan
 				{/if}
 			</button>
-			{#if plan.current}
-				<button class="underline py-5" formaction="?/cancelPlan">Cancel</button>
+			{#if plan.current && !plan.cancelled}
+				<button formaction="?/cancelPlan" class="underline py-5">Cancel</button>
 			{/if}
 			{#if noCard}
 				<p class="mt-5 text-sm text-gray-500">No Credit Card Required</p>
