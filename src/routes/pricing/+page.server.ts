@@ -64,6 +64,7 @@ export const actions: Actions = {
         // This should be done in the webhook
         const currentStripeId = data?.stripe_subscription_id;
         const currentStripeStatus = data?.stripe_subscription_status;
+        console.log(currentStripeId, currentStripeStatus);
         if (currentStripeId && currentStripeStatus === 'active') {
             try {
                 const subscription = await stripe.subscriptions.cancel(currentStripeId, {

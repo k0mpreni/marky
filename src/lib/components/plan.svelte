@@ -1,17 +1,31 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import type { TPlan } from '$lib/types/plans';
+	import type { SubmitFunction } from '@sveltejs/kit';
+	import Spinner from './spinner.svelte';
 
 	export let plan: TPlan;
 	export let principal = false;
 	export let noCard = false;
+	let loading = false;
+
+	const handleSubmit: SubmitFunction = () => {
+		loading = true;
+
+		return async ({ update, result }) => {
+			await update();
+			if (result.type !== 'redirect') {
+				loading = false;
+			}
+		};
+	};
 </script>
 
 <div class={`bg-white border-4 ${principal ? 'border-blue-600' : 'border-transparent'} rounded-md`}>
 	<form
 		method="POST"
 		action={plan.current && !plan.canceled && !plan.cancel_end ? '?/cancelPlan' : '?/choosePlan'}
-		use:enhance
+		use:enhance={handleSubmit}
 	>
 		<input class="hidden" type="hidden" name="planId" value={plan.id} />
 		<div class="p-6 md:py-10 md:px-9">
@@ -80,13 +94,13 @@
 			</ul>
 
 			<button
-				class={`inline-flex items-center justify-center w-full px-4 py-4 mt-8 font-semibold text-white transition-all duration-200 rounded-md ${
-					principal
-						? 'bg-gradient-to-r from-fuchsia-600 to-blue-600 hover:opacity-80 focus:opacity-80'
-						: 'bg-gray-800 hover:bg-gray-600 focus:bg-gray-600'
+				class={`inline-flex h-12 items-center justify-center w-full px-4 py-4 mt-8 font-semibold text-white transition-all duration-200 rounded-md focus:placeholder-opacity-80 hover:opacity-80 ${
+					principal ? 'bg-gradient-to-r from-fuchsia-600 to-blue-600' : 'bg-gray-800'
 				}`}
 			>
-				{#if plan.current && !plan.cancel_end}
+				{#if loading}
+					<Spinner />
+				{:else if plan.current && !plan.cancel_end}
 					Your plan
 				{:else if plan.current && plan.cancel_end}
 					Resubscribe
