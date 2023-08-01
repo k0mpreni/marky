@@ -22,7 +22,7 @@
 	});
 </script>
 
-<div class="bg-gray-50 flex flex-col h-full">
+<div class="bg-gradient-to-b from-transparent to-gray-200 flex flex-col min-h-screen">
 	<Nav isLoggedIn={!!session} />
 	<slot />
 </div>

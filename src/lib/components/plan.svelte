@@ -1,13 +1,18 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import type { TPlan } from '$lib/types/plans';
 
-	export let plan;
+	export let plan: TPlan;
 	export let principal = false;
 	export let noCard = false;
 </script>
 
 <div class={`bg-white border-4 ${principal ? 'border-blue-600' : 'border-transparent'} rounded-md`}>
-	<form method="POST" action="?/choosePlan" use:enhance>
+	<form
+		method="POST"
+		action={plan.current && !plan.canceled && !plan.cancel_end ? '?/cancelPlan' : '?/choosePlan'}
+		use:enhance
+	>
 		<input class="hidden" type="hidden" name="planId" value={plan.id} />
 		<div class="p-6 md:py-10 md:px-9">
 			<div
@@ -70,58 +75,27 @@
 							clip-rule="evenodd"
 						/>
 					</svg>
-					<span class="text-base font-medium text-gray-900"> Full Celebration Library </span>
-				</li>
-				<li class="inline-flex items-center space-x-2">
-					<svg
-						class="flex-shrink-0 w-5 h-5 text-green-500"
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 20 20"
-						fill="currentColor"
-					>
-						<path
-							fill-rule="evenodd"
-							d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-							clip-rule="evenodd"
-						/>
-					</svg>
-					<span class="text-base font-medium text-gray-400"> Design Files Included </span>
-				</li>
-
-				<li class="inline-flex items-center space-x-2">
-					<svg
-						class="flex-shrink-0 w-5 h-5 text-green-500"
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 20 20"
-						fill="currentColor"
-					>
-						<path
-							fill-rule="evenodd"
-							d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-							clip-rule="evenodd"
-						/>
-					</svg>
 					<span class="text-base font-medium text-gray-400"> Premium Support </span>
 				</li>
 			</ul>
 
 			<button
-				disabled={plan.current}
 				class={`inline-flex items-center justify-center w-full px-4 py-4 mt-8 font-semibold text-white transition-all duration-200 rounded-md ${
 					principal
 						? 'bg-gradient-to-r from-fuchsia-600 to-blue-600 hover:opacity-80 focus:opacity-80'
 						: 'bg-gray-800 hover:bg-gray-600 focus:bg-gray-600'
 				}`}
 			>
-				{#if plan.current}
+				{#if plan.current && !plan.cancel_end}
 					Your plan
+				{:else if plan.current && plan.cancel_end}
+					Resubscribe
+				{:else if plan.current && !plan.canceled}
+					Cancel
 				{:else}
 					Get this plan
 				{/if}
 			</button>
-			{#if plan.current && !plan.cancelled}
-				<button formaction="?/cancelPlan" class="underline py-5">Cancel</button>
-			{/if}
 			{#if noCard}
 				<p class="mt-5 text-sm text-gray-500">No Credit Card Required</p>
 			{/if}
