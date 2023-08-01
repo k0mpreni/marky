@@ -1,6 +1,11 @@
 <script>
+	import { browser } from '$app/environment';
+	import { preloadData } from '$app/navigation';
 	import RoundLink from './roundLink.svelte';
 	export let isLoggedIn = false;
+	$: if (browser) {
+		preloadData('/pricing');
+	}
 </script>
 
 <header class="bg-opacity-30">
@@ -51,11 +56,12 @@
 
 			<div class="hidden lg:flex lg:items-center lg:justify-center lg:space-x-10">
 				<a
-					href="/plans"
+					href="/pricing"
 					title=""
 					class="text-base text-black transition-all duration-200 hover:text-opacity-80"
+					data-sveltekit-preload-data
 				>
-					Plans
+					Pricing
 				</a>
 				{#if isLoggedIn}
 					<RoundLink name="Account" link="/user/account" />

@@ -1,5 +1,7 @@
-<script>
+<script lang="ts">
 	import RoundLink from './roundLink.svelte';
+
+	export let isLoggedIn: boolean;
 </script>
 
 <section class="py-10 sm:py-16 lg:py-24">
@@ -17,7 +19,7 @@
 				</p>
 
 				<div class="mt-8">
-					<RoundLink name="Join for free" link="/login" />
+					<RoundLink name="Join for free" link={isLoggedIn ? '/pricing' : '/login'} />
 				</div>
 			</div>
 

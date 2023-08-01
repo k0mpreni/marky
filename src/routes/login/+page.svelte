@@ -5,7 +5,7 @@
 	async function signInWithGoogle() {
 		const response = await data.supabase.auth.signInWithOAuth({
 			provider: 'google',
-			options: { redirectTo: '/plans' }
+			options: { redirectTo: '/pricing' }
 		});
 	}
 	async function signInWithGithub() {

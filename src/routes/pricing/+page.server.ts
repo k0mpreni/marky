@@ -1,6 +1,6 @@
 import { stripe } from '$lib/server/stripe';
 import type { TPlan } from '$lib/types/plans.js';
-import { redirect } from '@sveltejs/kit';
+import { redirect, type Actions, type Load } from '@sveltejs/kit';
 
 type TUserSubscription = {
     status: string;
@@ -8,8 +8,7 @@ type TUserSubscription = {
     canceled: boolean;
 };
 
-export async function load({ params, locals }) {
-    const productsRes = await stripe.products.list();
+export const load: Load = async ({ params, locals }) => {
     const priceRes = await stripe.prices.list();
     const { data, error } = await locals.supabase
         .from('profiles')
@@ -51,8 +50,8 @@ export async function load({ params, locals }) {
     return {
         plans
     };
-}
-export const actions = {
+};
+export const actions: Actions = {
     choosePlan: async ({ request, url, locals }) => {
         const formData = await request.formData();
         const planId = (formData.get('planId') as string) || undefined;
@@ -91,8 +90,8 @@ export const actions = {
                 }
             ],
             mode: 'subscription',
-            success_url: `${url.origin}/plans/success`,
-            cancel_url: `${url.origin}/plans/cancel`
+            success_url: `${url.origin}/pricing/success`,
+            cancel_url: `${url.origin}/pricing`
             // Uncomment to add a free trial without card required
             // subscription_data: {
             // 	trial_settings: {
@@ -108,7 +107,7 @@ export const actions = {
             throw redirect(303, res.url);
         }
     },
-    cancelPlan: async ({ request, url, locals }) => {
+    cancelPlan: async ({ request, locals }) => {
         const data = await request.formData();
         const planId = data.get('planId');
         const { data: supRes } = await locals.supabase

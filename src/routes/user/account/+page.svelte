@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Button from '$lib/components/button.svelte';
+	import type { User } from '@supabase/supabase-js';
 
-	export let data;
-	$: ({ user } = data);
+	export let data: { user: User };
 
 	const handleLogout = async () => {
 		const { error } = await data.supabase.auth.signOut();
@@ -20,7 +20,9 @@
 				Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia
 				consequat duis.
 			</p>
-			{JSON.stringify(user)}
+			<p class="my-5">
+				Email: {data.user.email}
+			</p>
 			<Button name="Logout" action={handleLogout} />
 		</div>
 	</div>

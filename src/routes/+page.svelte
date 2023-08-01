@@ -11,4 +11,4 @@
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<Hero />
+<Hero isLoggedIn={!!session?.user.email} />
