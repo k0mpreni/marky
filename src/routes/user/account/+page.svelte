@@ -1,8 +1,7 @@
 <script lang="ts">
 	import Button from '$lib/components/button.svelte';
-	import type { User } from '@supabase/supabase-js';
 
-	export let data: { user: User };
+	export let data: { account: any };
 
 	const handleLogout = async () => {
 		const { error } = await data.supabase.auth.signOut();
@@ -16,13 +15,18 @@
 	<div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
 		<div class="max-w-2xl mx-auto text-center flex flex-col items-center">
 			<h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">Account</h2>
-			<p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">
-				Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia
-				consequat duis.
-			</p>
-			<p class="my-5">
-				Email: {data.user.email}
-			</p>
+			<div class="my-5">
+				<p class="my-2">
+					Email: {data.account.email}
+				</p>
+				{#if data.account.isSubscribed}
+					<p class="my-2">Subscribed</p>
+				{:else if data.account.isCanceled}
+					<p class="my-2">Subscription canceled</p>
+				{:else}
+					<p class="my-2">Not subscription yet</p>
+				{/if}
+			</div>
 			<Button name="Logout" action={handleLogout} />
 		</div>
 	</div>

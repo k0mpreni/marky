@@ -1,5 +1,5 @@
 import { STRIPE_SIGNING_SECRET } from '$env/static/private';
-import { handleCheckoutCompleted } from '$lib/server/checkout';
+import { handleCheckoutCompleted, handleCheckoutUpdated } from '$lib/server/checkout';
 import { stripe } from '$lib/server/stripe';
 import { json, type RequestHandler } from '@sveltejs/kit';
 
@@ -25,6 +25,7 @@ export const POST: RequestHandler = async (event) => {
 				await handleCheckoutCompleted(stripeEvent.data.object);
 				break;
 			case 'customer.subscription.updated':
+				handleCheckoutUpdated(stripeEvent.data.object);
 				break;
 			default:
 				return json({ received: true }, { status: 200 });

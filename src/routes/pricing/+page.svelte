@@ -4,7 +4,6 @@
 
 	export let data;
 	let yearly = false;
-	$: plans = data.plans.filter((el) => el.yearly === yearly);
 </script>
 
 <svelte:head>
@@ -23,8 +22,14 @@
 		</div>
 		<!-- <Switch handleClick={() => (yearly = !yearly)} checked={yearly} /> -->
 		<div class="flex flex-wrap justify-center gap-6 mx-auto mt-8 sm:mt-16 sm:grid-cols-2">
-			{#each plans as plan, index}
-				<Plan {plan} principal={index === 1} />
+			{#each data.plans as plan, index}
+				<Plan
+					{plan}
+					cancel_end={data.userPlan.cancel_end}
+					canceled={data.userPlan.canceled}
+					current={data.userPlan.planId === plan.id}
+					principal={index === 1}
+				/>
 			{/each}
 		</div>
 	</div>

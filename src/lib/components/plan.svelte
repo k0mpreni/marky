@@ -1,12 +1,16 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import type { TPlan } from '$lib/types/plans';
 	import type { SubmitFunction } from '@sveltejs/kit';
 	import Spinner from './spinner.svelte';
+	import type { TPlan } from '$lib/types/plans';
 
 	export let plan: TPlan;
 	export let principal = false;
 	export let noCard = false;
+	export let current = false;
+	export let canceled = false;
+	export let cancel_end: number | null = null;
+
 	let loading = false;
 
 	const handleSubmit: SubmitFunction = () => {
@@ -24,7 +28,7 @@
 <div class={`bg-white border-4 ${principal ? 'border-blue-600' : 'border-transparent'} rounded-md`}>
 	<form
 		method="POST"
-		action={plan.current && !plan.canceled && !plan.cancel_end ? '?/cancelPlan' : '?/choosePlan'}
+		action={current && !canceled && !cancel_end ? '?/cancelPlan' : '?/choosePlan'}
 		use:enhance={handleSubmit}
 	>
 		<input class="hidden" type="hidden" name="planId" value={plan.id} />
@@ -37,13 +41,7 @@
 			<p class={`mt-5 text-5xl font-bold  ${principal ? 'text-blue-600' : 'text-black'}`}>
 				${plan.unit_amount / 100}
 			</p>
-			<p class="mt-2 text-base text-gray-600">
-				{#if plan.yearly}
-					Per year
-				{:else}
-					Per month
-				{/if}
-			</p>
+			<p class="mt-2 text-base text-gray-600">Per month</p>
 
 			<ul class="flex flex-col mt-8 space-y-4">
 				<li class="inline-flex items-center space-x-2">
@@ -100,11 +98,9 @@
 			>
 				{#if loading}
 					<Spinner />
-				{:else if plan.current && !plan.cancel_end}
-					Your plan
-				{:else if plan.current && plan.cancel_end}
+				{:else if current && cancel_end}
 					Resubscribe
-				{:else if plan.current && !plan.canceled}
+				{:else if current && !canceled}
 					Cancel
 				{:else}
 					Get this plan

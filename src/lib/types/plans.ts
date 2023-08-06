@@ -3,13 +3,11 @@ export type TPlan = {
 	name: string;
 	yearly: boolean;
 	unit_amount: number;
-	current: boolean;
-	canceled: boolean;
-	cancel_end: number | null;
 };
 
 export type TUserSubscription = {
 	cancel_end: number | null;
+	current: boolean;
 	canceled: boolean;
 	status: string;
 };
