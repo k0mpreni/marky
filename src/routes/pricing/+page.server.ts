@@ -1,6 +1,7 @@
 import { stripe } from '$lib/server/stripe';
 import type { TPlan } from '$lib/types/plans';
-import { redirect, type Actions, type Load } from '@sveltejs/kit';
+import { redirect, type Actions } from '@sveltejs/kit';
+import type { PageServerLoad } from './$types';
 
 type TUserSubscription = {
 	planId: string | null;
@@ -9,7 +10,7 @@ type TUserSubscription = {
 	canceled: boolean;
 };
 
-export const load: Load = async ({ locals }) => {
+export const load: PageServerLoad = async ({ locals }) => {
 	const getPrices = async () => {
 		const res = await stripe.prices.list();
 		const plans: TPlan[] = res.data
@@ -36,7 +37,7 @@ export const load: Load = async ({ locals }) => {
 			.select('price_id, stripe_id, status, period_end');
 
 		if (error) {
-			throw new Error(error);
+			throw new Error(error.message);
 		}
 
 		const subscriptionId = data && data[0]?.stripe_id;

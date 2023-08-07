@@ -55,6 +55,16 @@
 			</button>
 
 			<div class="hidden lg:flex lg:items-center lg:justify-center lg:space-x-10">
+				{#if isLoggedIn}
+					<a
+						href="/app"
+						title=""
+						class="text-base text-black transition-all duration-200 hover:text-opacity-80"
+						data-sveltekit-preload-data
+					>
+						App
+					</a>
+				{/if}
 				<a
 					href="/pricing"
 					title=""

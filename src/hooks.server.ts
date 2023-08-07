@@ -1,6 +1,7 @@
 import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public';
+import { stripe } from '$lib/server/stripe';
 import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit';
-import type { Handle } from '@sveltejs/kit';
+import { redirect, type Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.supabase = createSupabaseServerClient({
@@ -20,6 +21,18 @@ export const handle: Handle = async ({ event, resolve }) => {
 		} = await event.locals.supabase.auth.getSession();
 		return session;
 	};
+
+	if (event.url.pathname.startsWith('/app')) {
+		if (!(await event.locals.getSession())) throw redirect(303, '/login');
+		const { data: supRes } = await event.locals.supabase
+			.from('subscriptions')
+			.select('stripe_id')
+			.single();
+		const subscription = await stripe.subscriptions.retrieve(supRes?.stripe_id as string);
+		if (subscription.status !== 'active') {
+			throw redirect(303, '/pricing');
+		}
+	}
 
 	return resolve(event, {
 		filterSerializedResponseHeaders(name) {
