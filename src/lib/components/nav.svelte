@@ -74,9 +74,9 @@
 					Pricing
 				</a>
 				{#if isLoggedIn}
-					<RoundLink name="Account" link="/user/account" />
+					<RoundLink title="Account" link="/user/account" />
 				{:else}
-					<RoundLink name="Join now" link="/login" />
+					<RoundLink title="Join now" link="/login" />
 				{/if}
 			</div>
 		</div>

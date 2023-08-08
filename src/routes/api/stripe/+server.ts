@@ -31,7 +31,6 @@ export const POST: RequestHandler = async (event) => {
 				return json({ received: true }, { status: 200 });
 		}
 	} catch (e) {
-		console.log(e);
 		return json(`Error processing event ${stripeEvent.type}`, { status: 500 });
 	}
 	return json({ received: true }, { status: 200 });

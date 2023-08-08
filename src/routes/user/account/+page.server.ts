@@ -30,16 +30,24 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 
 	const { data: subscription } = await supabase.from('subscriptions').select().limit(1).single();
 
-	const isSubscribed = subscription?.id && subscription?.status === 'active' && subscription?.id;
+	const isSubscribed = subscription?.id && subscription?.status === 'active';
 
-	const isCanceled = subscription?.id && subscription?.status === 'canceled' && subscription?.id;
+	const canceledDate = subscription?.id && new Date(subscription.period_end);
+	const isCanceled =
+		(subscription?.id && subscription?.status === 'canceled') ||
+		(subscription.status === 'active' && canceledDate);
 
 	return {
 		email: user?.email,
 		name: profile.name,
 		infos: {
 			isSubscribed,
-			isCanceled
+			isCanceled,
+			canceledDate: new Date(canceledDate).toLocaleDateString('default', {
+				day: 'numeric',
+				month: 'long',
+				year: 'numeric'
+			})
 		},
 		editUrl: editUrl()
 	};

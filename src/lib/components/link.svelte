@@ -6,7 +6,7 @@
 <a
 	href={link}
 	{title}
-	class="text-base text-black transition-all duration-200 hover:text-opacity-80"
+	class="text-base text-black transition-all duration-200 hover:text-opacity-80 underline underline-offset-4"
 >
 	{title}
 </a>

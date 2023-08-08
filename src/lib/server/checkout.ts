@@ -57,7 +57,10 @@ export const handleCheckoutUpdated = async (subscription) => {
 			.from('subscriptions')
 			.update({
 				status: subscription.status,
-				period_end: new Date(subscription.cancel_at * 1000).toISOString() || null
+				period_end:
+					(subscription.cancel_at_period_end &&
+						new Date(subscription.cancel_at * 1000).toISOString()) ||
+					null
 			})
 			.eq('stripe_id', subscription.id);
 		if (error) {

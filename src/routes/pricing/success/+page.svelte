@@ -12,7 +12,7 @@
 			<p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">
 				Thanks for the subscription!
 			</p>
-			<RoundLink name="Go to home" link="/" />
+			<RoundLink title="Go to home" link="/" />
 		</div>
 	</div>
 </section>

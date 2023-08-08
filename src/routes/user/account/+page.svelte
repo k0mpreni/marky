@@ -24,19 +24,24 @@
 				<p class="my-2">
 					Email: {data.email}
 				</p>
-				{#if data.infos.isSubscribed}
-					{#await data.editUrl}
-						<p class="my-2">Loading</p>
-					{:then}
-						<p class="my-2">
-							Subscribed: <Link link={data.editUrl} title="Edit" />
-						</p>
-					{/await}
-				{:else if data.infos.isCanceled}
-					<p class="my-2">Subscription canceled</p>
-				{:else}
-					<p class="my-2">Not subscription yet</p>
-				{/if}
+				<div class="my-2">
+					{#if data.infos.isCanceled}
+						<span>Subscription canceled, ends on {data.infos.canceledDate}</span>
+					{:else if data.infos.isSubscribed}
+						{#await data.editUrl}
+							<span>Loading</span>
+						{:then}
+							<span>Subscribed:</span>
+						{/await}
+					{:else}
+						<span>Not subscription yet</span>
+					{/if}
+					<div>
+						{#if data.editUrl}
+							<Link link={data.editUrl} title="Edit subscription" />
+						{/if}
+					</div>
+				</div>
 			</div>
 			<Button name="Logout" action={handleLogout} />
 		</div>
