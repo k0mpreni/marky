@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Button from '$lib/components/button.svelte';
 	import Link from '$lib/components/link.svelte';
+	import { Button } from 'flowbite-svelte';
 
 	export let data;
 
@@ -43,7 +43,7 @@
 					</div>
 				</div>
 			</div>
-			<Button name="Logout" action={handleLogout} />
+			<Button on:click={handleLogout} outline color="dark">Logout</Button>
 		</div>
 	</div>
 </section>

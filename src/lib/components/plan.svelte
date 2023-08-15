@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import type { SubmitFunction } from '@sveltejs/kit';
-	import Spinner from './spinner.svelte';
 	import type { TPlan } from '$lib/types/plans';
+	import { Button, GradientButton, Spinner } from 'flowbite-svelte';
 
 	export let plan: TPlan;
 	export let principal = false;
@@ -43,7 +43,7 @@
 			</p>
 			<p class="mt-2 text-base text-gray-600">Per month</p>
 
-			<ul class="flex flex-col mt-8 space-y-4">
+			<ul class="flex flex-col my-8 space-y-4">
 				<li class="inline-flex items-center space-x-2">
 					<svg
 						class="flex-shrink-0 w-5 h-5 text-green-500"
@@ -91,13 +91,16 @@
 				</li>
 			</ul>
 
-			<button
-				class={`inline-flex h-12 items-center justify-center w-full px-4 py-4 mt-8 font-semibold text-white transition-all duration-200 rounded-md focus:placeholder-opacity-80 hover:opacity-80 ${
-					principal ? 'bg-gradient-to-r from-fuchsia-600 to-blue-600' : 'bg-gray-800'
-				}`}
+			<GradientButton
+				outline={!principal}
+				color={principal ? 'purpleToBlue' : 'blue'}
+				shadow={principal}
+				class="w-full"
+				type="submit"
+				size="lg"
 			>
 				{#if loading}
-					<Spinner />
+					<Spinner class="mr-3" size="6" />
 				{:else if current && cancel_end}
 					Resubscribe
 				{:else if current && !canceled}
@@ -105,7 +108,7 @@
 				{:else}
 					Get this plan
 				{/if}
-			</button>
+			</GradientButton>
 			{#if noCard}
 				<p class="mt-5 text-sm text-gray-500">No Credit Card Required</p>
 			{/if}

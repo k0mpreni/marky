@@ -1,6 +1,20 @@
 <script>
 	import { browser } from '$app/environment';
 	import { preloadData } from '$app/navigation';
+	import {
+		DarkMode,
+		GradientButton,
+		Navbar,
+		NavBrand,
+		NavLi,
+		NavUl,
+		NavHamburger,
+		Button,
+		Input
+	} from 'flowbite-svelte';
+	import { page } from '$app/stores';
+
+	console.log($page.url.pathname);
 	import RoundLink from './roundLink.svelte';
 	export let isLoggedIn = false;
 	$: if (browser) {
@@ -9,76 +23,34 @@
 </script>
 
 <header class="bg-opacity-30">
-	<div class="px-4 mx-auto sm:px-6 lg:px-8">
-		<div class="flex items-center justify-between h-16 lg:h-20">
-			<div class="flex-shrink-0">
-				<a href="/" title="Home" class="flex">
-					<img class="w-auto h-8" src="https://placehold.co/160x32" alt="" />
-				</a>
-			</div>
-
-			<button
-				type="button"
-				class="inline-flex p-2 text-black transition-all duration-200 rounded-md lg:hidden focus:bg-gray-100 hover:bg-gray-100"
+	<Navbar let:hidden let:toggle color="none">
+		<NavBrand href="/">
+			<img class="w-auto h-8" src="https://placehold.co/160x32" alt="" />
+		</NavBrand>
+		<NavUl
+			{hidden}
+			class="order-1"
+			ulClass="flex flex-col p-4 mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-md md:font-medium items-center"
+		>
+			{#if isLoggedIn}
+				<NavLi href="/app" active={$page.url.pathname === '/app'}>App</NavLi>
+			{/if}
+			<NavLi
+				href="/pricing"
+				data-sveltekit-preload-data="hover"
+				active={$page.url.pathname === '/pricing'}>Pricing</NavLi
 			>
-				<!-- Menu open: "hidden", Menu closed: "block" -->
-				<svg
-					class="block w-6 h-6"
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke="currentColor"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M4 8h16M4 16h16"
-					/>
-				</svg>
-
-				<!-- Menu open: "block", Menu closed: "hidden" -->
-				<svg
-					class="hidden w-6 h-6"
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke="currentColor"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M6 18L18 6M6 6l12 12"
-					/>
-				</svg>
-			</button>
-
-			<div class="hidden lg:flex lg:items-center lg:justify-center lg:space-x-10">
-				{#if isLoggedIn}
-					<a
-						href="/app"
-						title=""
-						class="text-base text-black transition-all duration-200 hover:text-opacity-80"
-						data-sveltekit-preload-data
-					>
-						App
-					</a>
-				{/if}
-				<a
-					href="/pricing"
-					title=""
-					class="text-base text-black transition-all duration-200 hover:text-opacity-80"
-					data-sveltekit-preload-data
-				>
-					Pricing
-				</a>
-				{#if isLoggedIn}
-					<RoundLink title="Account" link="/user/account" />
-				{:else}
-					<RoundLink title="Join now" link="/login" />
-				{/if}
+			<GradientButton
+				size="md"
+				shadow
+				href={isLoggedIn ? '/user/account' : '/login'}
+				color="purpleToBlue"
+				data-sveltekit-preload-data="hover">{isLoggedIn ? 'Account' : 'Sign in'}</GradientButton
+			>
+			<div class="ml-2">
+				<DarkMode />
 			</div>
-		</div>
-	</div>
+			<NavHamburger on:click={toggle} />
+		</NavUl>
+	</Navbar>
 </header>

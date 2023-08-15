@@ -1,5 +1,5 @@
 <script lang="ts">
-	import RoundLink from './roundLink.svelte';
+	import { Button, GradientButton } from 'flowbite-svelte';
 
 	export let isLoggedIn: boolean;
 </script>
@@ -19,7 +19,7 @@
 				</p>
 
 				<div class="mt-8">
-					<RoundLink name="Join for free" link={isLoggedIn ? '/pricing' : '/login'} />
+					<GradientButton href={isLoggedIn ? '/pricing' : '/login'}>Join for free</GradientButton>
 				</div>
 			</div>
 
