@@ -33,6 +33,7 @@ https://supabase.com/docs/guides/auth/social-login
 
 Sign into Stripe
 Go to Products and add the wanted products, this will be the plans shown on the site
+Add CVC rule
 
 ## Useful links
 

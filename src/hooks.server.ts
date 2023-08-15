@@ -34,6 +34,19 @@ export const handle: Handle = async ({ event, resolve }) => {
 		}
 	}
 
+	if (event.url.pathname.startsWith('/dashboard')) {
+		if (!(await event.locals.getSession())) throw redirect(303, '/');
+		const { data: supRes, error } = await event.locals.supabase
+			.from('users')
+			.select('role')
+			.single();
+
+		console.log(error);
+		if (supRes.role !== 1) {
+			throw redirect(303, '/');
+		}
+	}
+
 	return resolve(event, {
 		filterSerializedResponseHeaders(name) {
 			return name === 'content-range';
