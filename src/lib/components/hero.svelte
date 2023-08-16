@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, GradientButton } from 'flowbite-svelte';
+	import { GradientButton, P } from 'flowbite-svelte';
 
 	export let isLoggedIn: boolean;
 </script>
@@ -8,18 +8,20 @@
 	<div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
 		<div class="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
 			<div>
-				<p class="text-base font-semibold tracking-wider text-blue-600 uppercase">
+				<P
+					size="lg"
+					color="text-blue-600 dark:text-blue-400"
+					class="text-base font-semibold tracking-wider uppercase"
+				>
 					A social media for learners
-				</p>
-				<h1 class="mt-4 text-4xl font-bold text-black lg:mt-8 sm:text-6xl xl:text-8xl">
-					Connect & learn from the experts
-				</h1>
-				<p class="mt-4 text-base text-black lg:mt-8 sm:text-xl">
-					Grow your career fast with right mentor.
-				</p>
+				</P>
+				<P size="8xl" weight="bold" class="leading-none">Connect & learn from the experts</P>
+				<P class="mt-2" size="xl">Grow your career fast with right mentor.</P>
 
-				<div class="mt-8">
-					<GradientButton href={isLoggedIn ? '/pricing' : '/login'}>Join for free</GradientButton>
+				<div class="my-8">
+					<GradientButton shadow color="purpleToBlue" href={isLoggedIn ? '/pricing' : '/login'}
+						>Join for free</GradientButton
+					>
 				</div>
 			</div>
 

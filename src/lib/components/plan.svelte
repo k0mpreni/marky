@@ -25,7 +25,11 @@
 	};
 </script>
 
-<div class={`bg-white border-4 ${principal ? 'border-blue-600' : 'border-transparent'} rounded-md`}>
+<div
+	class={`bg-white dark:bg-gray-100 border-4 ${
+		principal ? 'border-blue-600' : 'border-transparent'
+	} rounded-md`}
+>
 	<form
 		method="POST"
 		action={current && !canceled && !cancel_end ? '?/cancelPlan' : '?/choosePlan'}
@@ -34,7 +38,9 @@
 		<input class="hidden" type="hidden" name="planId" value={plan.id} />
 		<div class="p-6 md:py-10 md:px-9">
 			<div
-				class={`inline-block px-4 py-2 ${principal ? 'bg-blue-100' : 'bg-gray-100'} rounded-full`}
+				class={`inline-block px-4 py-2 ${
+					principal ? 'bg-blue-100' : 'bg-gray-100 dark:bg-gray-200'
+				} rounded-full`}
 			>
 				<h3 class="text-sm font-semibold text-gray-900">{plan.name}</h3>
 			</div>

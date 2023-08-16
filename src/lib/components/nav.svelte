@@ -8,14 +8,10 @@
 		NavBrand,
 		NavLi,
 		NavUl,
-		NavHamburger,
-		Button,
-		Input
+		NavHamburger
 	} from 'flowbite-svelte';
 	import { page } from '$app/stores';
 
-	console.log($page.url.pathname);
-	import RoundLink from './roundLink.svelte';
 	export let isLoggedIn = false;
 	$: if (browser) {
 		preloadData('/pricing');
