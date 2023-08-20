@@ -42,6 +42,7 @@
 		"dotenv": "^16.3.1",
 		"flowbite": "^1.8.1",
 		"flowbite-svelte": "^0.43.2",
+		"flowbite-svelte-icons": "^0.3.6",
 		"stripe": "^12.10.0",
 		"tailwind-merge": "^1.14.0"
 	}

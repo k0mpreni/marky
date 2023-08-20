@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Faq from '$lib/components/faq.svelte';
 	import Hero from '$lib/components/hero.svelte';
 	export let data;
 
@@ -12,3 +13,4 @@
 </svelte:head>
 
 <Hero isLoggedIn={!!session?.user.email} />
+<Faq />

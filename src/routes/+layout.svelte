@@ -3,6 +3,7 @@
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import Nav from '$lib/components/nav.svelte';
+	import Footer from '$lib/components/footer.svelte';
 
 	export let data;
 
@@ -22,7 +23,8 @@
 	});
 </script>
 
-<div class=" flex flex-col min-h-screen">
+<div class="flex flex-col min-h-screen">
 	<Nav isLoggedIn={!!session} />
 	<slot />
+	<Footer />
 </div>

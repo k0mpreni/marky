@@ -42,7 +42,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 			.single();
 
 		console.log(error);
-		if (supRes.role !== 1) {
+		if (supRes.role !== 0) {
 			throw redirect(303, '/');
 		}
 	}

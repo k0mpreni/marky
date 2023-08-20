@@ -29,7 +29,13 @@
 			ulClass="flex flex-col p-4 mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-md md:font-medium items-center"
 		>
 			{#if isLoggedIn}
-				<NavLi href="/app" active={$page.url.pathname === '/app'}>App</NavLi>
+				<GradientButton
+					size="md"
+					shadow
+					href="/app"
+					color="purpleToBlue"
+					data-sveltekit-preload-data="hover">App</GradientButton
+				>
 			{/if}
 			<NavLi
 				href="/pricing"
@@ -38,7 +44,8 @@
 			>
 			<GradientButton
 				size="md"
-				shadow
+				shadow={!isLoggedIn}
+				outline={isLoggedIn}
 				href={isLoggedIn ? '/user/account' : '/login'}
 				color="purpleToBlue"
 				data-sveltekit-preload-data="hover">{isLoggedIn ? 'Account' : 'Sign in'}</GradientButton
