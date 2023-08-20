@@ -1,5 +1,5 @@
 <script>
-	import RoundLink from '$lib/components/roundLink.svelte';
+	import { Button } from 'flowbite-svelte';
 </script>
 
 <svelte:head>
@@ -12,7 +12,7 @@
 			<p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">
 				Thanks for the subscription!
 			</p>
-			<RoundLink title="Go to home" link="/" />
+			<Button color="blue" href="/">Go to home</Button>
 		</div>
 	</div>
 </section>
