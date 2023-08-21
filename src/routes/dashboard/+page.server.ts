@@ -8,7 +8,7 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 		throw redirect(303, '/');
 	}
 
-	const { data: organization } = await supabase.from('organizations').select().limit(1).single();
+	// Load the data that you need here
 
 	return {
 		organization: {
