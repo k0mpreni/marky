@@ -32,7 +32,8 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 
 	const isSubscribed = subscription?.id && subscription?.status === 'active';
 
-	const canceledDate = subscription?.id && new Date(subscription.period_end);
+	const canceledDate =
+		subscription?.id && subscription.period_end && new Date(subscription.period_end);
 	const isCanceled =
 		(subscription?.id && subscription?.status === 'canceled') ||
 		(subscription.status === 'active' && canceledDate);

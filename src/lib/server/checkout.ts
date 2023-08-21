@@ -1,8 +1,16 @@
+import type { Stripe } from 'stripe';
 import { stripe } from './stripe';
 import { supabaseAdmin } from './supabase-admin';
 
-export const handleCheckoutCompleted = async (checkout) => {
-	const userId = checkout.metadata.userId;
+// Doing this as the type is not complete for the subscription
+interface SubscriptionResponse extends Stripe.Subscription {
+	plan: {
+		id: string;
+	};
+}
+
+export const handleCheckoutCompleted = async (checkout: Stripe.Checkout.Session) => {
+	const userId = checkout.metadata?.userId;
 
 	const subscriptionId = checkout.subscription;
 
@@ -15,10 +23,12 @@ export const handleCheckoutCompleted = async (checkout) => {
 			.single();
 
 		if (!profile || error) {
-			console.error('error checkout getting profile', error);
+			throw new Error('error checkout getting profile:' + error.message);
 		}
 
-		const subscription = await stripe.subscriptions.retrieve(subscriptionId as string);
+		const subscription = (await stripe.subscriptions.retrieve(
+			subscriptionId as string
+		)) as unknown as SubscriptionResponse;
 
 		const { data, error: errorSub } = await supabaseAdmin
 			.from('subscriptions')
@@ -41,7 +51,7 @@ export const handleCheckoutCompleted = async (checkout) => {
 				subscription_id: data.id,
 				customer_id: subscription.customer
 			})
-			.eq('id', profile.organization_id);
+			.eq('id', profile?.organization_id);
 
 		if (errorOrga) {
 			throw new Error('orga' + errorOrga.message);
@@ -51,7 +61,7 @@ export const handleCheckoutCompleted = async (checkout) => {
 	}
 };
 
-export const handleCheckoutUpdated = async (subscription) => {
+export const handleCheckoutUpdated = async (subscription: Stripe.Subscription) => {
 	try {
 		const { error } = await supabaseAdmin
 			.from('subscriptions')
@@ -59,6 +69,7 @@ export const handleCheckoutUpdated = async (subscription) => {
 				status: subscription.status,
 				period_end:
 					(subscription.cancel_at_period_end &&
+						subscription.cancel_at &&
 						new Date(subscription.cancel_at * 1000).toISOString()) ||
 					null
 			})

@@ -1,7 +1,9 @@
+/// <reference types="stripe-event-types" />
 import { STRIPE_SIGNING_SECRET } from '$env/static/private';
 import { handleCheckoutCompleted, handleCheckoutUpdated } from '$lib/server/checkout';
 import { stripe } from '$lib/server/stripe';
 import { json, type RequestHandler } from '@sveltejs/kit';
+import type Stripe from 'stripe';
 
 export const POST: RequestHandler = async (event) => {
 	const stripeSignature = event.request.headers.get('stripe-signature');
@@ -15,7 +17,11 @@ export const POST: RequestHandler = async (event) => {
 	let stripeEvent;
 
 	try {
-		stripeEvent = stripe.webhooks.constructEvent(body, stripeSignature, STRIPE_SIGNING_SECRET);
+		stripeEvent = stripe.webhooks.constructEvent(
+			body,
+			stripeSignature,
+			STRIPE_SIGNING_SECRET
+		) as Stripe.DiscriminatedEvent;
 	} catch (e) {
 		return json('Invalid signature', { status: 401 });
 	}
