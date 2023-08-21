@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Link from '$lib/components/link.svelte';
 	import { A, Button, P, Span } from 'flowbite-svelte';
 
 	export let data;
@@ -30,19 +29,13 @@
 					{#if data.infos.isCanceled}
 						<Span>Subscription canceled, ends on {data.infos.canceledDate}</Span>
 					{:else if data.infos.isSubscribed}
-						{#await data.editUrl}
-							<Span>Loading</Span>
-						{:then}
-							<Span>Subscribed:</Span>
-						{/await}
+						<Span>Subscribed</Span>
 					{:else}
 						<span>Not subscription yet</span>
 					{/if}
-					<div class="mt-2">
-						{#if data.editUrl}
-							<A href={data.editUrl}>Edit subscription</A>
-						{/if}
-					</div>
+					{#if data.editUrl}
+						<A href={data.editUrl}>Edit subscription</A>
+					{/if}
 				</div>
 			</div>
 			<Button on:click={handleLogout} outline color="dark">Logout</Button>

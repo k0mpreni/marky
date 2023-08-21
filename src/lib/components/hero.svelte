@@ -26,7 +26,7 @@
 			</div>
 
 			<div>
-				<img class="w-full" src="https://placehold.co/650x660" alt="" />
+				<img class="w-full" src="https://placehold.co/550x560" alt="" />
 			</div>
 		</div>
 	</div>

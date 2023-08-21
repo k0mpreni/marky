@@ -2,7 +2,7 @@
 	import { enhance } from '$app/forms';
 	import type { SubmitFunction } from '@sveltejs/kit';
 	import type { TPlan } from '$lib/types/plans';
-	import { Button, GradientButton, Spinner } from 'flowbite-svelte';
+	import { GradientButton, Spinner } from 'flowbite-svelte';
 
 	export let plan: TPlan;
 	export let principal = false;

@@ -6,10 +6,6 @@ Why? So you can quickly bootstrap and focus on your idea
 
 ## Todo
 
-- [] Base Supabase setup with profiles and subscription / payment
-- [] Deployment somewhere
-- [] Better tailwind / components
-
 And a lot other stuff that I will build while learning more about SaaS, like good landing pages and so on
 
 ## Development
