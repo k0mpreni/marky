@@ -13,10 +13,10 @@
 					color="text-blue-600 dark:text-blue-400"
 					class="text-base font-semibold tracking-wider uppercase"
 				>
-					A social media for learners
+					Make a great Product
 				</P>
-				<P size="8xl" weight="bold" class="leading-none">Connect & learn from the experts</P>
-				<P class="mt-2" size="xl">Grow your career fast with right mentor.</P>
+				<P size="8xl" weight="bold" class="leading-none">Spend time on your product</P>
+				<P class="mt-2" size="xl">Build your product with speed.</P>
 
 				<div class="my-8">
 					<GradientButton shadow color="purpleToBlue" href={isLoggedIn ? '/pricing' : '/login'}
