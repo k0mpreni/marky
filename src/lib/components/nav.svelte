@@ -20,20 +20,19 @@
 </script>
 
 <header class="bg-opacity-300">
-	<Navbar let:hidden let:toggle color="gray" navClass="bg-gray-100 dark:bg-gray-800 p-4">
+	<Navbar let:hidden let:toggle color="gray">
 		<NavBrand href="/">
 			<img class="w-auto h-8" src="https://placehold.co/160x32" alt="" />
 		</NavBrand>
 
-		<NavUl {hidden} {activeUrl} class="order-1">
+		<NavUl
+			{hidden}
+			{activeUrl}
+			class="order-1 "
+			ulClass="flex flex-col p-4 mt-4 md:flex-row md:space-x-8 md:mt-0 sm:text-sm text-lg"
+		>
 			{#if isLoggedIn}
-				<GradientButton
-					size="md"
-					shadow
-					href="/app"
-					color="purpleToBlue"
-					data-sveltekit-preload-data="hover">App</GradientButton
-				>
+				<NavLi href="/app" data-sveltekit-preload-data="hover">App</NavLi>
 			{/if}
 			<NavLi href="/pricing" data-sveltekit-preload-data="hover">Pricing</NavLi>
 		</NavUl>
