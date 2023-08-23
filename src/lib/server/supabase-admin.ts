@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import { ENV } from './env';
+import { PUBLIC_SUPABASE_URL } from '$env/static/public';
+import { SUPABASE_SERVICE_ROLE_KEY } from '$env/static/private';
 
-export const supabaseAdmin = createClient(ENV.PUBLIC_SUPABASE_URL, ENV.SUPABASE_SERVICE_ROLE_KEY);
+export const supabaseAdmin = createClient(PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);

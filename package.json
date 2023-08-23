@@ -40,7 +40,6 @@
 		"@supabase/auth-ui-shared": "^0.1.6",
 		"@supabase/auth-ui-svelte": "^0.2.2",
 		"@supabase/supabase-js": "^2.26.0",
-		"dotenv": "^16.3.1",
 		"flowbite": "^1.8.1",
 		"flowbite-svelte": "^0.43.2",
 		"flowbite-svelte-icons": "^0.3.6",

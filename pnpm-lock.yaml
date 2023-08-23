@@ -16,9 +16,6 @@ dependencies:
   '@supabase/supabase-js':
     specifier: ^2.26.0
     version: 2.32.0
-  dotenv:
-    specifier: ^16.3.1
-    version: 16.3.1
   flowbite:
     specifier: ^1.8.1
     version: 1.8.1
@@ -1054,11 +1051,6 @@ packages:
     dependencies:
       esutils: 2.0.3
     dev: true
-
-  /dotenv@16.3.1:
-    resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
-    engines: {node: '>=12'}
-    dev: false
 
   /electron-to-chromium@1.4.496:
     resolution: {integrity: sha512-qeXC3Zbykq44RCrBa4kr8v/dWzYJA8rAwpyh9Qd+NKWoJfjG5vvJqy9XOJ9H4P/lqulZBCgUWAYi+FeK5AuJ8g==}

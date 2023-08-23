@@ -16,18 +16,16 @@
 	$: if (browser) {
 		preloadData('/pricing');
 	}
+	$: activeUrl = $page.url.pathname;
 </script>
 
-<header class="bg-opacity-30">
-	<Navbar let:hidden let:toggle color="none">
+<header class="bg-opacity-300">
+	<Navbar let:hidden let:toggle color="gray" navClass="bg-gray-100 dark:bg-gray-800 p-4">
 		<NavBrand href="/">
 			<img class="w-auto h-8" src="https://placehold.co/160x32" alt="" />
 		</NavBrand>
-		<NavUl
-			{hidden}
-			class="order-1"
-			ulClass="flex flex-col p-4 mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-md md:font-medium items-center"
-		>
+
+		<NavUl {hidden} {activeUrl} class="order-1">
 			{#if isLoggedIn}
 				<GradientButton
 					size="md"
@@ -37,11 +35,9 @@
 					data-sveltekit-preload-data="hover">App</GradientButton
 				>
 			{/if}
-			<NavLi
-				href="/pricing"
-				data-sveltekit-preload-data="hover"
-				active={$page.url.pathname === '/pricing'}>Pricing</NavLi
-			>
+			<NavLi href="/pricing" data-sveltekit-preload-data="hover">Pricing</NavLi>
+		</NavUl>
+		<div class="flex md:order-2">
 			<GradientButton
 				size="md"
 				shadow={!isLoggedIn}
@@ -50,10 +46,10 @@
 				color="purpleToBlue"
 				data-sveltekit-preload-data="hover">{isLoggedIn ? 'Account' : 'Sign in'}</GradientButton
 			>
+			<NavHamburger on:click={toggle} />
 			<div class="ml-2">
 				<DarkMode />
 			</div>
-			<NavHamburger on:click={toggle} />
-		</NavUl>
+		</div>
 	</Navbar>
 </header>
