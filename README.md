@@ -25,11 +25,24 @@ Create a project
 In "Authentication", set the wanted providers and add them into the `login` page
 https://supabase.com/docs/guides/auth/social-login
 
+### Setup auth trigger
+
+Execute this to create a trigger that will run the function to create a user and organization when a new user is created in the auth table 
+```
+CREATE TRIGGER
+  create_profile_on_signup
+  AFTER INSERT ON auth.users
+  FOR EACH ROW
+  EXECUTE PROCEDURE
+    public.create_profile_for_new_user();
+```
+
 ## Setup Stripe
 
 Sign into Stripe
 Go to Products and add the wanted products, this will be the plans shown on the site
 Add CVC rule
+
 
 ## Useful links
 
